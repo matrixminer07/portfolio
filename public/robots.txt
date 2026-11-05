@@ -1,0 +1,8 @@
+# Robots.txt for Spandan Roy Developer Portfolio
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+Sitemap: https://spandanroy.dev/sitemap.xml
