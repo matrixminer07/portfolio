@@ -7,17 +7,6 @@ export interface SkillCategory {
   skills: { name: string; level?: 'Core' | 'Advanced' | 'Practicing' }[];
 }
 
-export interface ProjectMetrics {
-  stars: number;
-  forks: number;
-  lastUpdated: string;
-  commits: number;
-  license: string;
-  activityVelocity: number[]; // activity trend
-  languages: { name: string; percentage: number; color: string }[];
-  healthScore: number;
-}
-
 export interface ProjectItem {
   id: string;
   title: string;
@@ -26,14 +15,12 @@ export interface ProjectItem {
   badge: string;
   badgeColor: string;
   techStack: string[];
-  stars?: number;
   description: string;
   bullets: string[];
   tags: string[];
   githubUrl: string;
   demoType: 'pharma' | 'sonar' | 'civic';
   accentColor: string;
-  metrics: ProjectMetrics;
 }
 
 export interface ExperienceItem {
@@ -183,7 +170,6 @@ export const PORTFOLIO_DATA = {
       badge: 'Concept & Architecture',
       badgeColor: 'border-cyan-800 bg-cyan-950/70 text-cyan-400',
       techStack: ['Java', 'Spring Boot', 'Python', 'FastAPI', 'REST APIs', 'Docker'],
-      stars: 1,
       description: 'An enterprise-level architectural platform designed for pharmaceutical risk prediction and strategic decision support. Focuses on real-time clinical trial analytics, drug pipeline tracking, and predictive evaluation using probabilistic machine learning models to mitigate adverse drug interactions and pipeline delays.',
       bullets: [
         'Scenario planning engine for data-informed clinical decisions and risk mitigation.',
@@ -193,21 +179,7 @@ export const PORTFOLIO_DATA = {
       tags: ['Python', 'Risk Modeling', 'Data Analytics', 'Predictive AI', 'Clinical Informatics'],
       githubUrl: 'https://github.com/matrixminer07/NexaCliniQ',
       demoType: 'pharma',
-      accentColor: '#00F0FF',
-      metrics: {
-        stars: 1,
-        forks: 0,
-        lastUpdated: 'Nov 2026',
-        commits: 34,
-        license: 'MIT',
-        activityVelocity: [4, 8, 12, 19, 27, 31, 34],
-        languages: [
-          { name: 'Python', percentage: 76.4, color: '#00F0FF' },
-          { name: 'Jupyter / Data', percentage: 16.2, color: '#10B981' },
-          { name: 'Shell / Docker', percentage: 7.4, color: '#8B5CF6' }
-        ],
-        healthScore: 98
-      }
+      accentColor: '#00F0FF'
     },
     {
       id: 'sonarix',
@@ -217,7 +189,6 @@ export const PORTFOLIO_DATA = {
       badge: 'Concept & Detection Workflow',
       badgeColor: 'border-violet-800 bg-violet-950/70 text-violet-400',
       techStack: ['Python', 'TypeScript', 'C++', 'OpenCV', 'Sonar Acoustics', 'AUV Telemetry'],
-      stars: 2,
       description: 'Formulated a conceptual intelligence system for identifying discarded plastic, submerged containers, and anomalous obstructions in side-scan sonar acoustic imagery. Streamlines survey operator reviews and equips autonomous underwater vehicle (AUV) planners with target coordinates.',
       bullets: [
         'Detection workflow algorithms designed to slash manual sonar review hours by 70%.',
@@ -227,21 +198,7 @@ export const PORTFOLIO_DATA = {
       tags: ['TypeScript', 'Sonar Acoustics', 'Anomaly Detection', 'AUV Planning', 'Side-Scan Sonar'],
       githubUrl: 'https://github.com/matrixminer07/SONARIX',
       demoType: 'sonar',
-      accentColor: '#8B5CF6',
-      metrics: {
-        stars: 2,
-        forks: 1,
-        lastUpdated: 'Oct 2026',
-        commits: 46,
-        license: 'Apache-2.0',
-        activityVelocity: [6, 14, 21, 28, 35, 42, 46],
-        languages: [
-          { name: 'TypeScript', percentage: 68.5, color: '#8B5CF6' },
-          { name: 'Python (CV)', percentage: 22.3, color: '#00F0FF' },
-          { name: 'C++ Telemetry', percentage: 9.2, color: '#F59E0B' }
-        ],
-        healthScore: 95
-      }
+      accentColor: '#8B5CF6'
     },
     {
       id: 'civic-tech',
@@ -251,7 +208,6 @@ export const PORTFOLIO_DATA = {
       badge: 'In Active Development',
       badgeColor: 'border-emerald-800 bg-emerald-950/70 text-emerald-400',
       techStack: ['Java', 'Spring Boot', 'React.js', 'MySQL', 'Firebase Auth', 'Tailwind CSS'],
-      stars: 3,
       description: 'A full-stack municipal citizen portal allowing residents to capture, report, and track civic infrastructure bottlenecks (potholes, sanitation outages, power line hazards) to municipal departments with real-time issue lifecycle tracking.',
       bullets: [
         'GPS geotagging & photo upload pipeline with automated department assignment.',
@@ -261,21 +217,7 @@ export const PORTFOLIO_DATA = {
       tags: ['Firebase Auth & Firestore', 'JavaScript / React', 'Geo-tagging', 'Issue Lifecycle', 'Municipal APIs'],
       githubUrl: 'https://github.com/matrixminer07',
       demoType: 'civic',
-      accentColor: '#10B981',
-      metrics: {
-        stars: 3,
-        forks: 2,
-        lastUpdated: 'Active Sprint',
-        commits: 58,
-        license: 'MIT',
-        activityVelocity: [8, 18, 29, 38, 44, 52, 58],
-        languages: [
-          { name: 'JavaScript / React', percentage: 56.8, color: '#10B981' },
-          { name: 'Firestore Rules', percentage: 28.1, color: '#00F0FF' },
-          { name: 'Tailwind CSS', percentage: 15.1, color: '#38BDF8' }
-        ],
-        healthScore: 99
-      }
+      accentColor: '#10B981'
     }
   ] as ProjectItem[],
 

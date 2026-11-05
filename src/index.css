@@ -149,3 +149,36 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #ff8c5988;
 }
+
+/* Reduced Motion Support for Accessibility & System Settings */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after,
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Stylesheet for Resume Modal & Curriculum Vitae */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  header, footer, nav, button, .editorial-grid, [role="button"], .fixed:not(#resume-modal-sheet) {
+    display: none !important;
+  }
+  #resume-modal-sheet {
+    position: static !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+}

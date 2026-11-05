@@ -159,6 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
               </span>
               <button
                 onClick={() => setBlogModalOpen(false)}
+                aria-label="Close engineering blog modal"
                 className="p-1 rounded-lg text-[#aaa9a4] hover:text-white transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />

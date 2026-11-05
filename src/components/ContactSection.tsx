@@ -11,9 +11,14 @@ export const ContactSection: React.FC = () => {
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     copyLimiter(() => {
-      navigator.clipboard.writeText(emailAddress);
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailAddress).then(() => {
+          setCopiedEmail(true);
+          setTimeout(() => setCopiedEmail(false), 2000);
+        }).catch(() => {
+          // Graceful fallback
+        });
+      }
     });
   };
 

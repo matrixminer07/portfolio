@@ -1,0 +1,17 @@
+{
+  "status": "healthy",
+  "data": {
+    "name": "Spandan Roy",
+    "role": "Backend Developer & CSE Student",
+    "university": "VIT-AP University",
+    "degree": "B.Tech CSE (Data Analytics) [2025 - 2029]",
+    "hometown": "Durgapur, West Bengal",
+    "leadership": "Co Lead @ Microsoft Student Chapter (MSC) VIT-AP",
+    "core_stack": ["Java", "Spring Boot", "Python", "SQL", "DSA", "APIs"],
+    "availability": "Open to SDE & Backend Internships (2025–2026)",
+    "profiles": {
+      "github": "https://github.com/matrixminer07",
+      "linkedin": "https://www.linkedin.com/in/spandan-roy/"
+    }
+  }
+}

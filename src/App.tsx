@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { ReadingProgressBar } from './components/ReadingProgressBar';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -11,8 +11,11 @@ import { About } from './components/About';
 import { EducationSection } from './components/EducationSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { ResumeModal } from './components/ResumeModal';
 import { ScrollReveal } from './components/ScrollReveal';
+
+const ResumeModal = lazy(() =>
+  import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
+);
 
 export default function App() {
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -41,6 +44,14 @@ export default function App() {
 
   return (
     <div className="bg-[#030303] text-[#f1eee8] font-sans antialiased relative min-h-screen overflow-x-hidden selection:bg-[#ff8c59] selection:text-[#030303]">
+      {/* Keyboard Accessible Skip to Content Link */}
+      <a
+        href="#projects"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-[#ff8c59] focus:text-[#030303] focus:font-mono focus:text-xs focus:rounded-md focus:shadow-lg focus:outline-none"
+      >
+        Skip to content
+      </a>
+
       {/* Top Reading Progress Bar */}
       <ReadingProgressBar />
 
@@ -102,11 +113,13 @@ export default function App() {
       {/* Editorial Footer */}
       <Footer />
 
-      {/* Full Curriculum Vitae / Resume Modal */}
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
-      />
+      {/* Full Curriculum Vitae / Resume Modal (Code-Split) */}
+      <Suspense fallback={null}>
+        <ResumeModal
+          isOpen={resumeOpen}
+          onClose={() => setResumeOpen(false)}
+        />
+      </Suspense>
 
       {/* Floating Motion Control Toggle */}
       <MotionToggle />

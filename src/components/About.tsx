@@ -63,7 +63,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResume }) => {
                 <span className="text-[#f1eee8] flex items-center gap-2">
                   <span>VIT-AP, Amaravati</span>
                   <span className="h-5 px-1 bg-white rounded flex items-center justify-center shrink-0 shadow-sm border border-white/20">
-                    <img src="/assets/vit-logo.png" alt="VIT-AP" className="h-3.5 w-auto object-contain" />
+                    <img src="/assets/vit-logo.png" alt="VIT-AP" width="20" height="14" loading="lazy" className="h-3.5 w-auto object-contain" />
                   </span>
                 </span>
               </div>
@@ -72,7 +72,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResume }) => {
                 <span className="text-[#f1eee8] flex items-center gap-2">
                   <span>D.A.V. Model School, Durgapur</span>
                   <span className="w-5 h-5 bg-white rounded p-0.5 flex items-center justify-center shrink-0 shadow-sm border border-white/20 overflow-hidden">
-                    <img src="/assets/dav-logo.jpg" alt="DAV" className="w-full h-full object-contain" />
+                    <img src="/assets/dav-logo.jpg" alt="DAV" width="20" height="20" loading="lazy" className="w-full h-full object-contain" />
                   </span>
                 </span>
               </div>

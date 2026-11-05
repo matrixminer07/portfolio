@@ -20,7 +20,7 @@ export const InteractiveTerminal: React.FC = () => {
   const [history, setHistory] = useState<CommandHistoryItem[]>([
     {
       id: 'init-curl',
-      command: 'curl -s https://api.spandanroy.dev/profile | jq',
+      command: 'curl -s https://spandanroy.dev/api/profile.json | jq',
       output: (
         <div className="text-slate-300 leading-relaxed pl-2 border-l-2 border-cyan-400/30 space-y-1">
           <p><span className="text-slate-500">"name":</span> <span className="text-cyan-300">"{PORTFOLIO_DATA.personal.name}"</span>,</p>
@@ -224,6 +224,9 @@ export const InteractiveTerminal: React.FC = () => {
 
       {/* Terminal output body */}
       <div
+        role="log"
+        aria-live="polite"
+        aria-label="Interactive terminal history log"
         className="p-5 font-mono text-xs space-y-4 bg-[#050507] flex-1 overflow-y-auto"
         onClick={() => inputRef.current?.focus()}
       >

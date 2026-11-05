@@ -21,6 +21,36 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   const [copied, setCopied] = React.useState(false);
   const emailAddress = React.useMemo(() => getContactEmail(), []);
   const copyLimiter = React.useMemo(() => createRateLimiter(800), []);
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -48,9 +78,14 @@ EXPERIENCE:
 ${PORTFOLIO_DATA.experiences.map(exp => `${exp.role} - ${exp.organization} (${exp.period})\n${exp.description}`).join('\n\n')}
     `.trim();
 
-      navigator.clipboard.writeText(resumeText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(resumeText).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }).catch(() => {
+          // Graceful fallback for restricted contexts
+        });
+      }
     });
   };
 
@@ -60,7 +95,14 @@ ${PORTFOLIO_DATA.experiences.map(exp => `${exp.role} - ${exp.organization} (${ex
 
   return (
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-4xl max-h-[90vh] bg-[#08080a] border border-[rgba(241,238,232,0.14)] rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-[#f1eee8]">
+      <div
+        ref={modalRef}
+        id="resume-modal-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Curriculum Vitae — Spandan Roy"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-[#08080a] border border-[rgba(241,238,232,0.14)] rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden text-[#f1eee8]"
+      >
         
         {/* Modal Top Bar */}
         <div className="px-6 py-4 bg-[#0c0c0f] border-b border-[rgba(241,238,232,0.08)] flex items-center justify-between">
@@ -104,6 +146,7 @@ ${PORTFOLIO_DATA.experiences.map(exp => `${exp.role} - ${exp.organization} (${ex
             </button>
             <button
               onClick={onClose}
+              aria-label="Close curriculum vitae modal"
               className="p-1.5 rounded-lg bg-[rgba(241,238,232,0.04)] hover:bg-rose-500/20 hover:text-rose-400 text-[#aaa9a4] transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
